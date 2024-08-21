@@ -1,0 +1,32 @@
+<?php
+
+declare(strict_types=1);
+
+use MageMonk\GoogleSignOn\ViewModel\RedirectUrl;
+
+/**
+ * @var Magento\Framework\View\Element\Template $block
+ * @var Magento\Framework\Escaper $escaper
+ * @var RedirectUrl $refererUrl
+ */
+?>
+<?php
+    $refererUrl = $block->getData('refererUrl');
+    $redirectUrl = $refererUrl->getRedirectUrlAfterLogin();
+?>
+<div class="google-signon grid">
+    <div class="actions-toolbar">
+        <div class="primary">
+            <a class="action google-auth primary"
+                data-mage-init='{"googleAuthorization": {
+                    "authUrl": "<?= $escaper->escapeUrl($block->getUrl('googlesignon/auth')) ?>",
+                    "action": "<?= $escaper->escapeUrl($block->getData('googleAction')) ?>",
+                    "referer": "<?= $escaper->escapeUrl($redirectUrl) ?>"
+                }}'>
+                <span class="google-icon"></span>
+                <span class="google-text"><?= $escaper->escapeHtml(__('Sign in with Google')) ?></span>
+            </a>
+        </div>
+    </div>
+    <div class="horizontal-line"><span><?= $escaper->escapeHtml(__('Or')) ?></span></div>
+</div>

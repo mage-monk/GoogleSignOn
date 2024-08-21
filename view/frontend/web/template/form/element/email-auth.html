@@ -1,0 +1,145 @@
+<!-- ko ifnot: isCustomerLoggedIn() -->
+
+<!-- ko foreach: getRegion('before-login-form') -->
+<!-- ko template: getTemplate() --><!-- /ko -->
+<!-- /ko -->
+<ul class="account-menu sign-in-account-menu">
+    <li id="create-account" data-bind="i18n: 'Create Account', css: { 'active': !isPasswordVisible() && accountMenuState() }, click: clickAccountMenu"></li>
+    <li id="sign-in" data-bind="i18n: 'Sign In', css: { 'active': isPasswordVisible() || !accountMenuState() }, click: clickAccountMenu"></li>
+</ul>
+<!-- ko foreach: getRegion('before-account-menu') -->
+<!-- ko template: getTemplate() --><!-- /ko -->
+<!-- /ko -->
+<form class="form customer" id="customer-form" data-role="email-with-possible-login"
+      data-bind="submit:login"
+      method="post">
+    <div class="password-hint">
+        <span data-bind="if: accountMenuState() && !isPasswordVisible()"><!-- ko i18n: "Enter your details below. You’ll get a chance to enter the recipient's details after checkout."--><!-- /ko --></span>
+        <span class="known-email" data-bind="if: isPasswordVisible"><!-- ko i18n: 'We recognise your email address,'--><!-- /ko --><br /><!-- ko i18n: 'you already have an account with us.'--><!-- /ko --></span>
+    </div>
+    <fieldset id="customer-email-fieldset" class="fieldset" data-bind="blockLoader: isLoading">
+        <div class="field required">
+            <label class="label" for="customer-email">
+                <span data-bind="i18n: 'Email Address'"></span>
+            </label>
+            <div class="control">
+                <input class="input-text"
+                       type="email"
+                       data-bind="textInput: email,hasFocus: emailFocused"
+                       name="username"
+                       data-validate="{required:true, 'validate-email':true}"
+                       id="customer-email" />
+            </div>
+        </div>
+        <!-- ko if: !isPasswordVisible() && accountMenuState() -->
+        <div class="field confirmation required">
+            <label class="label" for="customer-email-confirmation">
+                <span data-bind="i18n: 'Confirm email address'"></span>
+            </label>
+            <div class="control">
+                <input class="input-text"
+                       type="email"
+                       name="email_confirmation"
+                       data-bind="hasFocus: emailConfirmation, textInput: email"
+                       data-validate="{required:true, equalTo:'#customer-email', 'validate-email':true }"
+                       onpaste="return false"
+                       onCopy="return false"
+                       autocomplete="off"
+                       id="customer-email-confirmation" />
+            </div>
+        </div>
+        <!-- /ko -->
+        <!--Hidden fields -->
+        <fieldset class="fieldset hidden-fields" data-bind="if: !accountMenuState() || isPasswordVisible()">
+            <div class="field">
+                <label class="label" for="customer-password">
+                    <span data-bind="i18n: 'Password'"></span>
+                </label>
+                <div class="control">
+                    <input class="input-text"
+                           type="password"
+                           name="password"
+                           id="customer-password"
+                           data-validate="{required:true}" autocomplete="off"/>
+                </div>
+
+            </div>
+            <!-- ko foreach: getRegion('additional-login-form-fields') -->
+            <!-- ko template: getTemplate() --><!-- /ko -->
+            <!-- /ko -->
+        </fieldset>
+        <!--Hidden fields -->
+        <!-- ko if: !isPasswordVisible() && accountMenuState() -->
+        <fieldset class="fieldset" id="account-details">
+            <div class="field required">
+                <label class="label" for="telephone-input">
+                    <span data-bind="i18n: 'Mobile number'"></span>
+                </label>
+                <div id="mobile-input-control" class="control" data-bind="mageInit: {'dialingCodeFlagDropDown':{}}">
+                    <input type="tel" id="telephone-input" name="telephone" class="input-text" data-bind="attr: { 'data-isVisible': !isPasswordVisible() && accountMenuState() ? true : false }" data-validate="{required: true, 'validate-o4a-mobile':true}" value=""/>
+                </div>
+            </div>
+            <div class="field required">
+                <label class="label" for="firstname-input">
+                    <span data-bind="i18n: 'First Name'"></span>
+                </label>
+                <div class="control">
+                    <input type="text" data-bind="textInput: firstname" id="firstname-input" name="firstname" class="input-text" data-validate="{required: true}"/>
+                </div>
+            </div>
+            <div class="field required">
+                <label class="label" for="lastname-input">
+                    <span data-bind="i18n: 'Last Name'"></span>
+                </label>
+                <div class="control">
+                    <input type="text" id="lastname-input" data-bind="textInput: lastname" name="lastname" class="input-text" data-validate="{required: true}" value=""/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset class="fieldset" data-hasrequired="* Required Fields">
+            <h3><!-- ko i18n: 'Create password'--><!-- /ko --></h3>
+            <div class="password-hint"><!-- ko i18n: 'Must contain at least 8 characters'--><!-- /ko --></div>
+            <div class="field password required" data-mage-init='{"passwordStrengthIndicator": {}}'>
+                <label class="label" for="customer-password"><!-- ko i18n: 'Password'--><!-- /ko --></label>
+                <div class="control">
+                    <!-- TODO: get data-password-min-length and data-password-min-character-sets from config -->
+                    <input type="password" class="input-text" name="password" id="customer-password"
+                           data-password-min-length="8"
+                           data-password-min-character-sets="4"
+                           data-validate="{required:true, 'validate-customer-password':true}"
+                           autocomplete="off" />
+                </div>
+            </div>
+            <div class="field confirmation required">
+                <label class="label" for="password-confirmation"><!-- ko i18n: 'Confirm New Password'--><!-- /ko --></label>
+                <div class="control">
+                    <input type="password" class="input-text" name="password_confirmation" id="password-confirmation" data-validate="{required:true,equalTo:'#customer-password'}" autocomplete="off">
+                </div>
+            </div>
+        </fieldset>
+        <fieldset class="fieldset">
+            <div class="field terms-use">
+                <span for="terms_use">
+                    <!-- ko i18n: 'By creating an account you accept the web & app' --><!-- /ko -->
+                    <a href="#" data-trigger="content-modal" data-bind="i18n: 'Terms of Use'"></a>
+                </span>
+            </div>
+            <div class="modal-content" data-bind="mageInit: {
+                    'Magento_Ui/js/modal/modal':{
+                        'type': 'popup',
+                        'title': $t('Web & App Terms of Use'),
+                        'trigger': '[data-trigger=content-modal]',
+                        'responsive': true,
+                        'innerScroll': true,
+                        'buttons': [{
+                            text: $t('Close'),
+                            class: 'action'
+                        }]
+                    }}">
+                <div class="content" data-bind="html: getWebAppTermsHtml()"></div>
+            </div>
+        </fieldset>
+        <!-- /ko -->
+    </fieldset>
+</form>
+<!-- /ko -->

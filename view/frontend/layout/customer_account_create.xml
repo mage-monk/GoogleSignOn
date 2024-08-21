@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template" before="-" ifconfig="social_sign_on/google/is_enabled" name="google-signon-popup-authentication" template="MageMonk_GoogleSignOn::button.phtml">
+                <arguments>
+                    <argument name="googleAction" xsi:type="string">create</argument>
+                    <argument name="refererUrl" xsi:type="object">MageMonk\GoogleSignOn\ViewModel\RedirectUrl</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="callbackValidator" type="MageMonk\GoogleSignOn\Model\Customer\ValidatorComposite">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="is_enabled" xsi:type="object">MageMonk\GoogleSignOn\Model\Customer\Validation\IsEnabled</item>
+                <item name="code" xsi:type="object">codeNotEmptyValidator</item>
+                <item name="state" xsi:type="object">stateNotEmptyValidator</item>
+                <item name="state_parts" xsi:type="object">MageMonk\GoogleSignOn\Model\Customer\Validation\StateValidator</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="stateNotEmptyValidator" type="MageMonk\GoogleSignOn\Model\Customer\Validation\RequestVarValidator">
+        <arguments>
+            <argument name="requestVar" xsi:type="const">MageMonk\GoogleSignOn\Model\Customer\Validation\StateSession::VAR_NAME</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="codeNotEmptyValidator" type="MageMonk\GoogleSignOn\Model\Customer\Validation\RequestVarValidator">
+        <arguments>
+            <argument name="requestVar" xsi:type="string">code</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Start Customer Session dependency -->
+    <type name="MageMonk\GoogleSignOn\Model\Customer\Validation\NoncePartValidator">
+        <arguments>
+            <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="MageMonk\GoogleSignOn\Controller\Auth\Index">
+        <arguments>
+            <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="MageMonk\GoogleSignOn\Controller\Callback\Index">
+        <arguments>
+            <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="MageMonk\GoogleSignOn\Model\Customer\Validation\StateSession">
+        <arguments>
+            <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <!-- End Customer Session dependency -->
+
+    <type name="MageMonk\GoogleSignOn\Model\Customer\Validation\StateValidator">
+        <arguments>
+            <argument name="statePartsValidator" xsi:type="array">
+                <item name="1" xsi:type="object">MageMonk\GoogleSignOn\Model\Customer\Validation\StateSession</item>
+                <item name="2" xsi:type="object">MageMonk\GoogleSignOn\Model\Customer\Validation\NoncePartValidator</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="MageMonk\GoogleSignOn\Controller\Callback\Index">
+        <arguments>
+            <argument name="validate" xsi:type="object">callbackValidator</argument>
+            <argument name="logger" xsi:type="object">googleSignOnLogger</argument>
+        </arguments>
+    </type>
+    <virtualType name="googleSignOnLogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">MageMonk\GoogleSignOn\Model\Logger\GoogleHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="MageMonk\GoogleSignOn\Model\Logger\GoogleHandler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
+        <plugin sortOrder="1" name="add_google_login_button" type="MageMonk\GoogleSignOn\Plugin\Checkout\LayoutProcessor" />
+    </type>
+
+    <type name="Magento\Customer\Block\Account\AuthenticationPopup">
+        <plugin sortOrder="1" name="add_google_login_button" type="MageMonk\GoogleSignOn\Plugin\Account\AuthenticationPopup" />
+    </type>
+
+    <type name="MageMonk\SocialSignOn\ViewModel\IsEnableSso">
+        <arguments>
+            <argument name="configs" xsi:type="array">
+                <item name="config" xsi:type="object">MageMonk\GoogleSignOn\Api\ConfigInterface</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,21 @@
+<!-- ko if-not: isCustomerLoggedIn() -->
+<!-- ko if: isActive -->
+<div class="google-signon grid">
+    <div class="actions-toolbar">
+        <div class="primary">
+            <a class="action google-auth primary"
+               data-bind="mageInit: {
+                'googleAuthorization':{
+                    'authUrl': '/googlesignon/auth',
+                    'action': actionName,
+                    'referer': afterAuthUrl,
+                }}">
+                <span class="google-icon"></span>
+                <span class="google-text" data-bind="i18n: 'Sign in with Google'"></span>
+            </a>
+        </div>
+    </div>
+    <div class="horizontal-line"><span data-bind="i18n: 'Or'"></span></div>
+</div>
+<!-- /ko -->
+<!-- /ko -->

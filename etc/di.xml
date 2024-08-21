@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="MageMonk\SocialSignOn\Model\Customer\Attribute\Source\RegistrationSourceType">
+        <plugin sortOrder="1" name="add_registration_option" type="MageMonk\GoogleSignOn\Plugin\Customer\Attribute\Source\RegistrationSourceOption" />
+    </type>
+
+    <preference for="MageMonk\GoogleSignOn\Api\ConfigInterface" type="MageMonk\GoogleSignOn\Model\Config" />
+
+    <type name="MageMonk\GoogleSignOn\Model\ConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="google_signon" xsi:type="object">MageMonk\GoogleSignOn\Model\DefaultConfigProvider</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

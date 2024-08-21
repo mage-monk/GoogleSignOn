@@ -1,0 +1,32 @@
+{
+    "name": "mage-monk/module-google-sign-on",
+    "description": "Google Sign On for Magento 2",
+    "require": {
+        "php": "^8.1",
+        "magento/magento2-customer": "*",
+        "google/apiclient": "^2.15"
+    },
+    "keywords": [
+        "magento",
+        "google login"
+    ],
+    "authors": [
+        {
+            "name": "Prince Kumar",
+            "email": "prince.lpu1991@gmail.com"
+        }
+    ],
+    "type": "magento2-module",
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "MageMonk\\GoogleSignOn\\": ""
+        }
+    }
+}

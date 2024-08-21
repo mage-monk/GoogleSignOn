@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="MageMonk_GoogleSignOn">
+        <sequence>
+            <module name="MageMonk_Base"/>
+            <module name="Magento_Customer"/>
+            <module name="MageMonk_SocialSignOn"/>
+        </sequence>
+    </module>
+</config>

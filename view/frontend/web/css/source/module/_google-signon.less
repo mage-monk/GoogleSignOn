@@ -1,0 +1,128 @@
+@color3: #444;
+@color1: #a4a4a4;
+@color2: #fff;
+@background: white;
+& when (@media-common = true) {
+    .google-signon.grid {
+        display: grid;
+        place-content: center;
+        margin-top: 28px;
+
+        .actions-toolbar {
+            .primary {
+                a.action.google-auth.primary {
+                    background: @background;
+                    color: @color3;
+                    border: 1px solid @color3;
+                    margin: 0px;
+                    padding: 5px 10px 5px 10px;
+                    display: flex;
+
+                    span.google-icon {
+                        background-position: left;
+                        background-repeat: no-repeat;
+                        padding-left: 35px;
+                        margin: 0;
+                        background-image: url('images/google-logo.png');
+
+                        &::before {
+                            content: '';
+                        }
+                    }
+
+                    span.google-text {
+                        font-size: 1.4rem;
+                        font-weight: 500;
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+    }
+
+    .customer-account-login {
+        .google-signon.grid {
+            justify-content: space-between;
+        }
+    }
+
+    .horizontal-line {
+        text-align: center;
+        border-bottom: 1px solid @color1;
+        line-height: .1em;
+        margin: 30px 20px 30px 20px;
+
+        span {
+            background: @color2;
+            padding: 0 10px;
+        }
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .customer-account-login {
+        .google-signon.grid {
+            display: block;
+
+            .actions-toolbar {
+                .primary {
+                    a.action.google-auth.primary {
+                        justify-content: center;
+                    }
+                }
+            }
+        }
+
+        div.login-container {
+            div.block.block-customer-login {
+                margin-bottom: 35px;
+
+                .fieldset {
+                    margin: 0 0 0px;
+
+                    &:after {
+                        margin-top: 17.5px;
+                    }
+                }
+            }
+        }
+
+
+
+    }
+
+    .customer-account-create {
+        .google-signon.grid {
+            display: block;
+
+            .actions-toolbar {
+                .primary {
+                    a.action.google-auth.primary {
+                        justify-content: center;
+                    }
+                }
+            }
+        }
+    }
+
+    .checkout-index-index {
+        .google-signon.grid {
+            display: block;
+            justify-content: center;
+
+            .actions-toolbar {
+                .primary {
+                    a.action.google-auth.primary {
+                        justify-content: center;
+                    }
+                }
+            }
+        }
+
+        .form.form-login {
+            margin-top: 0px;
+            padding-top: 0px;
+        }
+
+    }
+}

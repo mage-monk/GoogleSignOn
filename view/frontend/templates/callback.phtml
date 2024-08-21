@@ -1,0 +1,36 @@
+<?php
+
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/**
+ * @var Template $block
+ * @var Escaper $escaper
+ */
+?>
+<div class="callback-error" id="callback-error" style="color: #ed1c23;"></div>
+<?php if ($block->getData("status")): ?>
+<script>
+    let refererUrl = "<?= $escaper->escapeUrl($block->getData("refererUrl"))?>";
+
+    if (refererUrl) {
+        window.opener.location.replace(refererUrl);
+    } else {
+        window.opener.location.reload(true);
+    }
+
+    window.close();
+</script>
+<?php else: ?>
+<script>
+    let errorMessage = {
+        event_id: 'social_sso_error',
+        message: "<?= $escaper->escapeHtmlAttr(__($block->getData("message"))) ?>",
+        type: "<?= $escaper->escapeHtml($block->getData("type")) ?>"
+    };
+    window.opener.postMessage(errorMessage, "*");
+    window.close();
+</script>
+<?php endif; ?>
