@@ -1,8 +1,3 @@
-/**
- * Copyright © Blackhawk Network. All rights reserved.
- * See LICENSE_BHN.txt for license details.
- */
-
 var config = {
     paths: {
         googleAuthorization: 'MageMonk_GoogleSignOn/js/google-authorization'

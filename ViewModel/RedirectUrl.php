@@ -1,8 +1,5 @@
 <?php
-/**
- * Copyright © Blackhawk Network. All rights reserved.
- * See LICENSE_BHN.txt for license details.
- */
+
 declare(strict_types=1);
 
 namespace MageMonk\GoogleSignOn\ViewModel;
