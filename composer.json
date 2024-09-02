@@ -24,8 +24,16 @@
     "minimum-stability": "dev",
     "repositories": [
         {
-            "type": "vcs",
-            "url":  "git@github.com:mage-monk/GoogleSignOn.git"
+            "type": "package",
+            "package": {
+                "name": "mage-monk/module-google-sign-on",
+                "version": "1.0.0",
+                "source": {
+                    "type": "git",
+                    "url": "git@github.com:mage-monk/GoogleSignOn.git",
+                    "reference": "1.0.0"
+                }
+            }
         }
     ],
     "prefer-stable": true,
