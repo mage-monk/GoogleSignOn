@@ -1,7 +1,7 @@
 {
     "name": "mage-monk/module-google-sign-on",
     "description": "Google Sign On for Magento 2",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "require": {
         "php": "^8.2",
         "google/apiclient": "^2.15",
@@ -27,11 +27,11 @@
             "type": "package",
             "package": {
                 "name": "mage-monk/module-google-sign-on",
-                "version": "1.0.1",
+                "version": "1.0.2",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:mage-monk/GoogleSignOn.git",
-                    "reference": "1.0.1"
+                    "reference": "1.0.2"
                 }
             }
         }
