@@ -1,2 +1,9 @@
-Befor installing Gogole sign on, please install Google api clinet
-composer install google/apiclient
+# MageMonk Google Login
+
+## Summary
+Module for Social login using google account
+
+## Installation
+```shell
+composer require mage-monk/module-google-sign-on
+```
