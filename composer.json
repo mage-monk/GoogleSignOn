@@ -1,12 +1,12 @@
 {
     "name": "mage-monk/module-google-sign-on",
     "description": "Google Sign On for Magento 2",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "require": {
         "php": "^8.2",
         "google/apiclient": "^2.15",
         "mage-monk/module-base": "^1.0.0",
-        "mage-monk/module-social-sign-on": "^1.0.0"
+        "mage-monk/module-social-sign-on": "^1.0.1"
     },
     "keywords": [
         "magento social login",
@@ -27,11 +27,11 @@
             "type": "package",
             "package": {
                 "name": "mage-monk/module-google-sign-on",
-                "version": "1.0.0",
+                "version": "1.0.1",
                 "source": {
                     "type": "git",
                     "url": "git@github.com:mage-monk/GoogleSignOn.git",
-                    "reference": "1.0.0"
+                    "reference": "1.0.1"
                 }
             }
         }
