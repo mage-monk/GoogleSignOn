@@ -21,6 +21,14 @@
             "email": "prince.lpu1991@gmail.com"
         }
     ],
+    "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "git@github.com:mage-monk/GoogleSignOn.git"
+        }
+    ],
+    "prefer-stable": true,
     "type": "magento2-module",
     "license": [
         "OSL-3.0",
