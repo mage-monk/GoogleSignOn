@@ -4,7 +4,6 @@
     "version": "1.0.0",
     "require": {
         "php": "^8.2",
-        "magento/magento2-customer": "*",
         "google/apiclient": "^2.15",
         "mage-monk/module-base": "^1.0.0",
         "mage-monk/module-social-sign-on": "^1.0.0"
