@@ -3,7 +3,7 @@
     "description": "Google Sign On for Magento 2",
     "version": "1.0.0",
     "require": {
-        "php": "~8.2",
+        "php": "^8.2",
         "google/apiclient": "^2.15",
         "mage-monk/module-base": "^1.0.0",
         "mage-monk/module-social-sign-on": "^1.0.0"
